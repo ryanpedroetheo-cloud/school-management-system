@@ -1,0 +1,82 @@
+/* =======================
+   DASHBOARD
+======================= */
+
+.content{
+    flex: 1;
+    padding: 20px;
+}
+
+.content-header{
+    margin-bottom: 20px;
+}
+
+.content-header h2{
+    margin-bottom: 5px;
+}
+
+.content-header p{
+    color: #666;
+}
+
+.cards{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.card{
+    flex: 1;
+    min-width: 200px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.card-title{
+    margin-bottom: 15px;
+}
+
+.card-content{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dashboard-panels{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.panel{
+    flex: 1;
+    min-width: 320px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.activities ul,
+.notifications ul{
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.activities li,
+.notifications li{
+    margin-bottom: 10px;
+}
+
+.button{
+    width: fit-content;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background: #d32f2f;
+    color: #ffffff;
+    cursor: pointer;
+}
