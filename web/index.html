@@ -67,6 +67,8 @@
                     <p>Visão geral do sistema.</p>
                 </header>
 
+                <!-- CARDS -->
+
                 <section class="cards">
 
                     <article class="card">
@@ -75,7 +77,7 @@
                         <div class="card-content">
                             <h2>128</h2>
 
-                            <button class="button" onclick="mostrarAlunos()">
+                            <button id="btnAlunos" class="button">
                                 Ver detalhes
                             </button>
                         </div>
@@ -88,7 +90,7 @@
                         <div class="card-content">
                             <h2>24</h2>
 
-                            <button class="button" onclick="mostrarProfessores()">
+                            <button id="btnProfessores" class="button">
                                 Ver detalhes
                             </button>
                         </div>
@@ -101,7 +103,7 @@
                         <div class="card-content">
                             <h2>15</h2>
 
-                            <button class="button" onclick="mostrarTurmas()">
+                            <button id="btnTurmas" class="button">
                                 Ver detalhes
                             </button>
                         </div>
@@ -114,7 +116,7 @@
                         <div class="card-content">
                             <h2>92%</h2>
 
-                            <button class="button" onclick="mostrarFrequencia()">
+                            <button id="btnFrequencia" class="button">
                                 Ver detalhes
                             </button>
                         </div>
@@ -122,6 +124,80 @@
                     </article>
 
                 </section>
+
+                <!-- FUNCIONALIDADES -->
+
+                <section class="dashboard-panels">
+
+                    <!-- FALTAS -->
+
+                    <article class="panel">
+
+                        <h3>Faltas</h3>
+
+                        <p>Gerenciamento de faltas dos alunos.</p>
+
+                        <input
+                            type="number"
+                            id="studentId"
+                            placeholder="ID do aluno"
+                        >
+
+                        <br><br>
+
+                        <button id="btnRegistrarFalta" class="button">
+                            Registrar Falta
+                        </button>
+
+                        <button id="btnConsultarFaltas" class="button">
+                            Consultar Faltas
+                        </button>
+
+                    </article>
+
+                    <!-- ESTATÍSTICAS -->
+
+                    <article class="panel">
+
+                        <h3>Estatísticas</h3>
+
+                        <p>Consultar estatísticas do sistema.</p>
+
+                        <button id="btnEstatisticas" class="button">
+                            Ver Estatísticas
+                        </button>
+
+                    </article>
+
+                    <!-- ASYNC/AWAIT -->
+
+                    <article class="panel">
+
+                        <h3>Async/Await</h3>
+
+                        <p>Demonstrar uma operação assíncrona.</p>
+
+                        <button id="btnAsync" class="button">
+                            Executar Async/Await
+                        </button>
+
+                    </article>
+
+                </section>
+
+                <!-- RESULTADO -->
+
+                <section class="panel">
+
+                    <h3>Resultado</h3>
+
+                    <p id="resultado">
+                        Nenhuma operação executada.
+                    </p>
+
+                </section>
+
+                <!-- ATIVIDADES E AVISOS -->
 
                 <section class="dashboard-panels">
 
