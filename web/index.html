@@ -3,181 +3,530 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="School Management System - Sistema de gerenciamento escolar."
+    >
+
     <title>School Management System</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <!-- Favicon -->
+    <link
+        rel="icon"
+        type="image/png"
+        href="assets/images/logo-sms.png"
+    >
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 </head>
+
 
 <body>
 
     <div class="container">
 
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
         <header id="header" class="header">
 
             <section class="logo">
-                <img src="assets/images/logo.png" alt="Logo SMS">
+
+                <img
+                    src="assets/images/logo-sms.png"
+                    alt="Logo School Management System"
+                >
+
             </section>
+
 
             <section class="header-title">
-                <h1>School Management System</h1>
+
+                <h1>
+                    School Management System
+                </h1>
+
             </section>
 
+
             <section class="user-profile">
-                <p>Bem-vindo(a),</p>
-                <strong>Administrador</strong>
+
+                <p>
+                    <i class="fa-solid fa-user"></i>
+                    Bem-vindo(a),
+                </p>
+
+                <strong>
+                    Administrador
+                </strong>
+
             </section>
 
         </header>
 
+
+
+        <!-- =================================================
+             NAVBAR
+        ================================================== -->
+
         <nav id="navbar" class="navbar">
 
             <ul class="menu">
-                <li class="menu-item">Dashboard</li>
-                <li class="menu-item">Alunos</li>
-                <li class="menu-item">Professores</li>
-                <li class="menu-item">Relatórios</li>
-                <li class="menu-item">Configurações</li>
+
+                <li
+                    class="menu-item"
+                    data-page="Dashboard"
+                >
+                    <i class="fa-solid fa-table-columns"></i>
+                    Dashboard
+                </li>
+
+
+                <li
+                    class="menu-item"
+                    data-page="Alunos"
+                >
+                    <i class="fa-solid fa-user"></i>
+                    Alunos
+                </li>
+
+
+                <li
+                    class="menu-item"
+                    data-page="Professores"
+                >
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    Professores
+                </li>
+
+
+                <li
+                    class="menu-item"
+                    data-page="Relatórios"
+                >
+                    <i class="fa-solid fa-chart-column"></i>
+                    Relatórios
+                </li>
+
+
+                <li
+                    class="menu-item"
+                    data-page="Configurações"
+                >
+                    <i class="fa-solid fa-gear"></i>
+                    Configurações
+                </li>
+
             </ul>
 
         </nav>
 
+
+
+        <!-- =================================================
+             MAIN
+        ================================================== -->
+
         <main id="main" class="main">
+
+
+            <!-- =================================================
+                 SIDEBAR
+            ================================================== -->
 
             <aside id="sidebar" class="sidebar">
 
                 <ul class="menu">
-                    <li class="menu-item">Dashboard</li>
-                    <li class="menu-item">Alunos</li>
-                    <li class="menu-item">Professores</li>
-                    <li class="menu-item">Turmas</li>
-                    <li class="menu-item">Disciplinas</li>
-                    <li class="menu-item">Faltas</li>
-                    <li class="menu-item">Relatórios</li>
-                    <li class="menu-item">Calendário</li>
-                    <li class="menu-item">Configurações</li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Dashboard"
+                    >
+                        <i class="fa-solid fa-table-columns"></i>
+                        Dashboard
+                    </li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Alunos"
+                    >
+                        <i class="fa-solid fa-user"></i>
+                        Alunos
+                    </li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Professores"
+                    >
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                        Professores
+                    </li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Turmas"
+                    >
+                        <i class="fa-solid fa-users-rectangle"></i>
+                        Turmas
+                    </li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Disciplinas"
+                    >
+                        <i class="fa-solid fa-book"></i>
+                        Disciplinas
+                    </li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Faltas"
+                    >
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                        Faltas
+                    </li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Estatísticas"
+                    >
+                        <i class="fa-solid fa-chart-column"></i>
+                        Estatísticas
+                    </li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Calendário"
+                    >
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Calendário
+                    </li>
+
+
+                    <li
+                        class="menu-item"
+                        data-page="Configurações"
+                    >
+                        <i class="fa-solid fa-gear"></i>
+                        Configurações
+                    </li>
+
                 </ul>
 
             </aside>
 
+
+
+            <!-- =================================================
+                 CONTENT
+            ================================================== -->
+
             <section id="content" class="content">
 
+
+                <!-- CABEÇALHO -->
+
                 <header class="content-header">
-                    <h2>Dashboard</h2>
-                    <p>Visão geral do sistema.</p>
+
+                    <h2>
+                        Dashboard
+                    </h2>
+
+                    <p>
+                        Visão geral do sistema.
+                    </p>
+
                 </header>
 
-                <!-- CARDS -->
+
+
+                <!-- =================================================
+                     CARDS
+                ================================================== -->
 
                 <section class="cards">
 
+
+                    <!-- ALUNOS -->
+
                     <article class="card">
-                        <h3 class="card-title">Total de Alunos</h3>
+
+                        <h3 class="card-title">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Total de Alunos
+
+                        </h3>
+
 
                         <div class="card-content">
-                            <h2>128</h2>
 
-                            <button id="btnAlunos" class="button">
+                            <h2>
+                                128
+                            </h2>
+
+                            <button
+                                type="button"
+                                id="btnAlunos"
+                                class="button"
+                            >
                                 Ver detalhes
                             </button>
+
                         </div>
 
                     </article>
 
+
+
+                    <!-- PROFESSORES -->
+
                     <article class="card">
-                        <h3 class="card-title">Total de Professores</h3>
+
+                        <h3 class="card-title">
+
+                            <i class="fa-solid fa-chalkboard-user"></i>
+
+                            Total de Professores
+
+                        </h3>
+
 
                         <div class="card-content">
-                            <h2>24</h2>
 
-                            <button id="btnProfessores" class="button">
+                            <h2>
+                                24
+                            </h2>
+
+                            <button
+                                type="button"
+                                id="btnProfessores"
+                                class="button"
+                            >
                                 Ver detalhes
                             </button>
+
                         </div>
 
                     </article>
 
+
+
+                    <!-- TURMAS -->
+
                     <article class="card">
-                        <h3 class="card-title">Turmas Ativas</h3>
+
+                        <h3 class="card-title">
+
+                            <i class="fa-solid fa-users-rectangle"></i>
+
+                            Turmas Ativas
+
+                        </h3>
+
 
                         <div class="card-content">
-                            <h2>15</h2>
 
-                            <button id="btnTurmas" class="button">
+                            <h2>
+                                15
+                            </h2>
+
+                            <button
+                                type="button"
+                                id="btnTurmas"
+                                class="button"
+                            >
                                 Ver detalhes
                             </button>
+
                         </div>
 
                     </article>
 
+
+
+                    <!-- FREQUÊNCIA -->
+
                     <article class="card">
-                        <h3 class="card-title">Taxa de Frequência</h3>
+
+                        <h3 class="card-title">
+
+                            <i class="fa-solid fa-calendar-check"></i>
+
+                            Taxa de Frequência
+
+                        </h3>
+
 
                         <div class="card-content">
-                            <h2>92%</h2>
 
-                            <button id="btnFrequencia" class="button">
+                            <h2>
+                                92%
+                            </h2>
+
+                            <button
+                                type="button"
+                                id="btnFrequencia"
+                                class="button"
+                            >
                                 Ver detalhes
                             </button>
+
                         </div>
 
                     </article>
 
                 </section>
 
-                <!-- FUNCIONALIDADES -->
+
+
+                <!-- =================================================
+                     FUNCIONALIDADES
+                ================================================== -->
 
                 <section class="dashboard-panels">
+
 
                     <!-- FALTAS -->
 
                     <article class="panel">
 
-                        <h3>Faltas</h3>
+                        <h3>
 
-                        <p>Gerenciamento de faltas dos alunos.</p>
+                            <i class="fa-solid fa-calendar-xmark"></i>
+
+                            Faltas
+
+                        </h3>
+
+
+                        <p>
+                            Gerenciamento de faltas dos alunos.
+                        </p>
+
 
                         <input
                             type="number"
                             id="studentId"
                             placeholder="ID do aluno"
+                            min="1"
                         >
+
 
                         <br><br>
 
-                        <button id="btnRegistrarFalta" class="button">
+
+                        <button
+                            type="button"
+                            id="btnRegistrarFalta"
+                            class="button"
+                        >
                             Registrar Falta
                         </button>
 
-                        <button id="btnConsultarFaltas" class="button">
+
+                        <button
+                            type="button"
+                            id="btnConsultarFaltas"
+                            class="button"
+                        >
                             Consultar Faltas
                         </button>
 
                     </article>
 
+
+
                     <!-- ESTATÍSTICAS -->
 
                     <article class="panel">
 
-                        <h3>Estatísticas</h3>
+                        <h3>
 
-                        <p>Consultar estatísticas do sistema.</p>
+                            <i class="fa-solid fa-chart-column"></i>
 
-                        <button id="btnEstatisticas" class="button">
+                            Estatísticas
+
+                        </h3>
+
+
+                        <p>
+                            Consultar estatísticas do sistema.
+                        </p>
+
+
+                        <button
+                            type="button"
+                            id="btnEstatisticas"
+                            class="button"
+                        >
                             Ver Estatísticas
                         </button>
 
                     </article>
 
+
+
                     <!-- ASYNC/AWAIT -->
 
                     <article class="panel">
 
-                        <h3>Async/Await</h3>
+                        <h3>
 
-                        <p>Demonstrar uma operação assíncrona.</p>
+                            <i class="fa-solid fa-gear"></i>
 
-                        <button id="btnAsync" class="button">
+                            Async/Await
+
+                        </h3>
+
+
+                        <p>
+                            Demonstrar uma operação assíncrona.
+                        </p>
+
+
+                        <button
+                            type="button"
+                            id="btnAsync"
+                            class="button"
+                        >
                             Executar Async/Await
                         </button>
 
@@ -185,11 +534,22 @@
 
                 </section>
 
-                <!-- RESULTADO -->
+
+
+                <!-- =================================================
+                     RESULTADO
+                ================================================== -->
 
                 <section class="panel">
 
-                    <h3>Resultado</h3>
+                    <h3>
+
+                        <i class="fa-solid fa-bell"></i>
+
+                        Resultado
+
+                    </h3>
+
 
                     <p id="resultado">
                         Nenhuma operação executada.
@@ -197,31 +557,79 @@
 
                 </section>
 
-                <!-- ATIVIDADES E AVISOS -->
+
+
+                <!-- =================================================
+                     ATIVIDADES E AVISOS
+                ================================================== -->
 
                 <section class="dashboard-panels">
 
+
+                    <!-- ATIVIDADES -->
+
                     <article class="panel activities">
 
-                        <h3>Atividades Recentes</h3>
+                        <h3>
+
+                            <i class="fa-solid fa-clock"></i>
+
+                            Atividades Recentes
+
+                        </h3>
+
 
                         <ul>
-                            <li>Novo aluno João Silva cadastrado.</li>
-                            <li>Falta registrada para a turma 3ºA.</li>
-                            <li>Nota lançada para Matemática.</li>
-                            <li>Relatório mensal gerado.</li>
+
+                            <li>
+                                Novo aluno João Silva cadastrado.
+                            </li>
+
+                            <li>
+                                Falta registrada para a turma 3ºA.
+                            </li>
+
+                            <li>
+                                Nota lançada para Matemática.
+                            </li>
+
+                            <li>
+                                Relatório mensal gerado.
+                            </li>
+
                         </ul>
 
                     </article>
 
+
+
+                    <!-- AVISOS -->
+
                     <article class="panel notifications">
 
-                        <h3>Avisos Importantes</h3>
+                        <h3>
+
+                            <i class="fa-solid fa-bell"></i>
+
+                            Avisos Importantes
+
+                        </h3>
+
 
                         <ul>
-                            <li>Reunião pedagógica - 24/07 às 14h.</li>
-                            <li>Entrega de relatórios - Prazo final 30/07.</li>
-                            <li>Férias escolares - Período 15/12 a 31/12.</li>
+
+                            <li>
+                                Reunião pedagógica - 24/07 às 14h.
+                            </li>
+
+                            <li>
+                                Entrega de relatórios - Prazo final 30/07.
+                            </li>
+
+                            <li>
+                                Férias escolares - Período 15/12 a 31/12.
+                            </li>
+
                         </ul>
 
                     </article>
@@ -232,20 +640,75 @@
 
         </main>
 
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
         <footer id="footer" class="footer">
 
-            <p><strong>Kaizen Software Labs</strong></p>
 
-            <p>School Management System</p>
+            <div>
 
-            <p>Versão 1.0.0</p>
+                <img
+                    src="assets/images/logo-ksl.png"
+                    alt="Kaizen Software Labs"
+                >
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    <strong>
+                        Kaizen Software Labs
+                    </strong>
+                </p>
+
+                <p>
+                    Desenvolvendo soluções para educação.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    <strong>
+                        School Management System
+                    </strong>
+                </p>
+
+                <p>
+                    Versão 1.0.0
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    Siga-nos:
+                </p>
+
+            </div>
 
         </footer>
 
     </div>
 
+
+
+    <!-- =================================================
+         JAVASCRIPT
+    ================================================== -->
+
     <script src="js/app.js"></script>
 
 </body>
 
-</html>
+</html>     

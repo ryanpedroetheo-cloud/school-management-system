@@ -1,49 +1,82 @@
 /*
-========================================
+=========================================================
 SCHOOL MANAGEMENT SYSTEM
-JavaScript - Navegação com DOM
-========================================
+JavaScript - Navegação e funcionalidades do Dashboard
+=========================================================
 */
 
-/* =======================
-   CONSTANTES
-======================= */
+
+/* =======================================================
+   CONFIGURAÇÕES DA APLICAÇÃO
+======================================================= */
 
 const APP_NAME = "School Management System";
+const APP_VERSION = "1.0.0";
+const USUARIO = "Administrador";
 
-/* =======================
-   VARIÁVEIS
-======================= */
 
-let usuario = "Administrador";
+/* =======================================================
+   DADOS INICIAIS
+======================================================= */
 
-/* =======================
+const dadosSistema = {
+
+    alunos: 128,
+
+    professores: 24,
+
+    turmas: 15,
+
+    frequencia: 92,
+
+    faltas: [],
+
+    atividades: [
+        "Novo aluno João Silva cadastrado.",
+        "Falta registrada para a turma 3ºA.",
+        "Nota lançada para Matemática.",
+        "Relatório mensal gerado."
+    ]
+
+};
+
+
+/* =======================================================
    ELEMENTOS DO DOM
-======================= */
+======================================================= */
 
-// Área principal
 const content = document.getElementById("content");
 
-// Resultado das operações
 const resultado = document.getElementById("resultado");
 
-// Itens do menu e Sidebar
-const menuItems = document.getElementsByClassName("menu-item");
+const menuItems = document.querySelectorAll(
+    ".menu-item[data-page]"
+);
 
-/* =======================
+
+/* =======================================================
    BOTÕES DO DASHBOARD
-======================= */
+======================================================= */
 
-const btnAlunos = document.getElementById("btnAlunos");
-const btnProfessores = document.getElementById("btnProfessores");
-const btnTurmas = document.getElementById("btnTurmas");
-const btnFrequencia = document.getElementById("btnFrequencia");
+const btnAlunos =
+    document.getElementById("btnAlunos");
 
-/* =======================
+const btnProfessores =
+    document.getElementById("btnProfessores");
+
+const btnTurmas =
+    document.getElementById("btnTurmas");
+
+const btnFrequencia =
+    document.getElementById("btnFrequencia");
+
+
+/* =======================================================
    BOTÕES DE FALTAS
-======================= */
+======================================================= */
 
-const studentId = document.getElementById("studentId");
+const studentId =
+    document.getElementById("studentId");
 
 const btnRegistrarFalta =
     document.getElementById("btnRegistrarFalta");
@@ -51,222 +84,732 @@ const btnRegistrarFalta =
 const btnConsultarFaltas =
     document.getElementById("btnConsultarFaltas");
 
-/* =======================
-   BOTÕES DE ESTATÍSTICAS
-======================= */
+
+/* =======================================================
+   BOTÃO DE ESTATÍSTICAS
+======================================================= */
 
 const btnEstatisticas =
     document.getElementById("btnEstatisticas");
 
-/* =======================
+
+/* =======================================================
    BOTÃO ASYNC/AWAIT
-======================= */
+======================================================= */
 
 const btnAsync =
     document.getElementById("btnAsync");
 
-/* =======================
-   FUNÇÕES DO DASHBOARD
-======================= */
 
-function mostrarAlunos() {
+/* =======================================================
+   FUNÇÃO AUXILIAR
+   Atualiza o campo de resultado
+======================================================= */
 
-    console.log("Botão Total de Alunos clicado.");
+function mostrarResultado(mensagem) {
 
-    if (resultado) {
-        resultado.textContent =
-            "Consulta de alunos executada. Verifique o Console.";
-    }
-
-}
-
-function mostrarProfessores() {
-
-    console.log("Botão Total de Professores clicado.");
-
-    if (resultado) {
-        resultado.textContent =
-            "Consulta de professores executada. Verifique o Console.";
-    }
-
-}
-
-function mostrarTurmas() {
-
-    console.log("Botão Turmas Ativas clicado.");
-
-    if (resultado) {
-        resultado.textContent =
-            "Consulta de turmas executada. Verifique o Console.";
-    }
-
-}
-
-function mostrarFrequencia() {
-
-    console.log("Botão Taxa de Frequência clicado.");
-
-    if (resultado) {
-        resultado.textContent =
-            "Consulta de frequência executada. Verifique o Console.";
-    }
-
-}
-
-/* =======================
-   FUNÇÃO REGISTRAR FALTA
-======================= */
-
-function registrarFalta() {
-
-    console.log("Botão Registrar Falta clicado.");
-
-    const id = Number(studentId.value);
-
-    if (!id) {
-
-        console.log("ID do aluno não informado.");
-
-        if (resultado) {
-            resultado.textContent =
-                "Informe o ID do aluno.";
-        }
-
+    if (!resultado) {
         return;
     }
 
-    console.log(
-        "Falta solicitada para o aluno:",
-        id
-    );
+    resultado.textContent = mensagem;
 
-    if (resultado) {
-        resultado.textContent =
-            `Falta registrada para o aluno ${id}.`;
+}
+
+
+/* =======================================================
+   FUNÇÃO AUXILIAR
+   Adiciona uma atividade recente
+======================================================= */
+
+function adicionarAtividade(mensagem) {
+
+    dadosSistema.atividades.unshift(mensagem);
+
+    if (dadosSistema.atividades.length > 5) {
+
+        dadosSistema.atividades.pop();
+
     }
 
 }
 
-/* =======================
-   FUNÇÃO CONSULTAR FALTAS
-======================= */
+
+/* =======================================================
+   FUNÇÃO AUXILIAR
+   Formata data e hora
+======================================================= */
+
+function obterDataHoraAtual() {
+
+    const agora = new Date();
+
+    return agora.toLocaleString(
+        "pt-BR",
+        {
+            dateStyle: "short",
+            timeStyle: "short"
+        }
+    );
+
+}
+
+
+/* =======================================================
+   FUNÇÃO AUXILIAR
+   Salvar dados no navegador
+======================================================= */
+
+function salvarDados() {
+
+    try {
+
+        localStorage.setItem(
+            "sms_dados",
+            JSON.stringify(dadosSistema)
+        );
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Não foi possível salvar os dados:",
+            erro
+        );
+
+    }
+
+}
+
+
+/* =======================================================
+   FUNÇÃO AUXILIAR
+   Carregar dados do navegador
+======================================================= */
+
+function carregarDados() {
+
+    try {
+
+        const dadosSalvos =
+            localStorage.getItem("sms_dados");
+
+        if (!dadosSalvos) {
+            return;
+        }
+
+        const dados =
+            JSON.parse(dadosSalvos);
+
+        if (dados.alunos !== undefined) {
+            dadosSistema.alunos = dados.alunos;
+        }
+
+        if (dados.professores !== undefined) {
+            dadosSistema.professores = dados.professores;
+        }
+
+        if (dados.turmas !== undefined) {
+            dadosSistema.turmas = dados.turmas;
+        }
+
+        if (dados.frequencia !== undefined) {
+            dadosSistema.frequencia = dados.frequencia;
+        }
+
+        if (Array.isArray(dados.faltas)) {
+            dadosSistema.faltas = dados.faltas;
+        }
+
+        if (Array.isArray(dados.atividades)) {
+            dadosSistema.atividades = dados.atividades;
+        }
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao carregar dados:",
+            erro
+        );
+
+    }
+
+}
+
+
+/* =======================================================
+   DASHBOARD
+   TOTAL DE ALUNOS
+======================================================= */
+
+function mostrarAlunos() {
+
+    console.log(
+        "Botão Total de Alunos clicado."
+    );
+
+    mostrarResultado(
+        `O sistema possui ${dadosSistema.alunos} alunos cadastrados.`
+    );
+
+}
+
+
+/* =======================================================
+   DASHBOARD
+   TOTAL DE PROFESSORES
+======================================================= */
+
+function mostrarProfessores() {
+
+    console.log(
+        "Botão Total de Professores clicado."
+    );
+
+    mostrarResultado(
+        `O sistema possui ${dadosSistema.professores} professores cadastrados.`
+    );
+
+}
+
+
+/* =======================================================
+   DASHBOARD
+   TURMAS
+======================================================= */
+
+function mostrarTurmas() {
+
+    console.log(
+        "Botão Turmas Ativas clicado."
+    );
+
+    mostrarResultado(
+        `O sistema possui ${dadosSistema.turmas} turmas ativas.`
+    );
+
+}
+
+
+/* =======================================================
+   DASHBOARD
+   FREQUÊNCIA
+======================================================= */
+
+function mostrarFrequencia() {
+
+    console.log(
+        "Botão Taxa de Frequência clicado."
+    );
+
+    mostrarResultado(
+        `A taxa de frequência atual é de ${dadosSistema.frequencia}%.`
+    );
+
+}
+
+
+/* =======================================================
+   REGISTRAR FALTA
+======================================================= */
+
+function registrarFalta() {
+
+    console.log(
+        "Botão Registrar Falta clicado."
+    );
+
+
+    if (!studentId) {
+
+        mostrarResultado(
+            "Campo de ID do aluno não encontrado."
+        );
+
+        return;
+
+    }
+
+
+    const id =
+        Number(studentId.value);
+
+
+    /* Validação */
+
+    if (!id || id <= 0) {
+
+        mostrarResultado(
+            "Informe um ID de aluno válido."
+        );
+
+        studentId.focus();
+
+        return;
+
+    }
+
+
+    /* Criação do registro */
+
+    const falta = {
+
+        idAluno: id,
+
+        data: obterDataHoraAtual(),
+
+        tipo: "Falta"
+
+    };
+
+
+    dadosSistema.faltas.push(falta);
+
+
+    adicionarAtividade(
+        `Falta registrada para o aluno ${id}.`
+    );
+
+
+    salvarDados();
+
+
+    console.log(
+        "Falta registrada:",
+        falta
+    );
+
+
+    mostrarResultado(
+        `Falta registrada com sucesso para o aluno ${id}.`
+    );
+
+
+    studentId.value = "";
+
+}
+
+
+/* =======================================================
+   CONSULTAR FALTAS
+======================================================= */
 
 function consultarFaltas() {
 
-    console.log("Botão Consultar Faltas clicado.");
+    console.log(
+        "Botão Consultar Faltas clicado."
+    );
 
-    console.log("Executando consulta de faltas.");
 
-    if (resultado) {
-        resultado.textContent =
-            "Consulta de faltas executada. Verifique o Console.";
+    if (dadosSistema.faltas.length === 0) {
+
+        mostrarResultado(
+            "Nenhuma falta foi registrada até o momento."
+        );
+
+        return;
+
     }
+
+
+    const quantidade =
+        dadosSistema.faltas.length;
+
+
+    console.log(
+        "Faltas registradas:",
+        dadosSistema.faltas
+    );
+
+
+    mostrarResultado(
+        `Existem ${quantidade} registro(s) de falta no sistema. Verifique o Console para visualizar os detalhes.`
+    );
 
 }
 
-/* =======================
-   FUNÇÃO ESTATÍSTICAS
-======================= */
+
+/* =======================================================
+   ESTATÍSTICAS
+======================================================= */
 
 function mostrarEstatisticas() {
 
-    console.log("Botão Estatísticas clicado.");
+    console.log(
+        "Botão Estatísticas clicado."
+    );
 
-    console.log("Executando estatísticas do sistema.");
 
-    if (resultado) {
-        resultado.textContent =
-            "Estatísticas executadas. Verifique o Console.";
-    }
+    const totalFaltas =
+        dadosSistema.faltas.length;
+
+
+    const alunos =
+        dadosSistema.alunos;
+
+
+    const professores =
+        dadosSistema.professores;
+
+
+    const turmas =
+        dadosSistema.turmas;
+
+
+    const frequencia =
+        dadosSistema.frequencia;
+
+
+    console.log(
+        "========== ESTATÍSTICAS =========="
+    );
+
+    console.log(
+        "Alunos:",
+        alunos
+    );
+
+    console.log(
+        "Professores:",
+        professores
+    );
+
+    console.log(
+        "Turmas:",
+        turmas
+    );
+
+    console.log(
+        "Frequência:",
+        frequencia + "%"
+    );
+
+    console.log(
+        "Faltas registradas:",
+        totalFaltas
+    );
+
+
+    mostrarResultado(
+        `Estatísticas: ${alunos} alunos, ${professores} professores, ${turmas} turmas, frequência de ${frequencia}% e ${totalFaltas} falta(s) registrada(s).`
+    );
 
 }
 
-/* =======================
-   FUNÇÃO ASYNC/AWAIT
-======================= */
+
+/* =======================================================
+   ASYNC/AWAIT
+======================================================= */
 
 async function executarAsync() {
 
-    console.log("Botão Async/Await clicado.");
+    console.log(
+        "Botão Async/Await clicado."
+    );
 
-    if (resultado) {
-        resultado.textContent =
-            "Operação Async/Await iniciada...";
+
+    mostrarResultado(
+        "Operação Async/Await iniciada..."
+    );
+
+
+    try {
+
+        console.log(
+            "Iniciando operação assíncrona..."
+        );
+
+
+        await new Promise(
+            function (resolve) {
+
+                setTimeout(
+                    resolve,
+                    2000
+                );
+
+            }
+        );
+
+
+        console.log(
+            "Operação Async/Await finalizada!"
+        );
+
+
+        mostrarResultado(
+            "Operação Async/Await finalizada com sucesso!"
+        );
+
     }
 
-    console.log("Iniciando operação assíncrona...");
+    catch (erro) {
 
-    await new Promise(function (resolve) {
+        console.error(
+            "Erro na operação assíncrona:",
+            erro
+        );
 
-        setTimeout(resolve, 2000);
 
-    });
+        mostrarResultado(
+            "Ocorreu um erro durante a operação assíncrona."
+        );
 
-    console.log("Operação Async/Await finalizada!");
-
-    if (resultado) {
-        resultado.textContent =
-            "Operação Async/Await finalizada!";
     }
 
 }
 
-/* =======================
+
+/* =======================================================
+   ATUALIZAÇÃO DO TÍTULO DO CONTENT
+======================================================= */
+
+function atualizarTitulo(titulo, descricao) {
+
+    const tituloElement =
+        document.querySelector(
+            ".content-header h2"
+        );
+
+    const descricaoElement =
+        document.querySelector(
+            ".content-header p"
+        );
+
+
+    if (tituloElement) {
+
+        tituloElement.textContent =
+            titulo;
+
+    }
+
+
+    if (descricaoElement) {
+
+        descricaoElement.textContent =
+            descricao;
+
+    }
+
+}
+
+
+/* =======================================================
+   MENU ATIVO
+======================================================= */
+
+function atualizarMenuAtivo(nome) {
+
+    menuItems.forEach(
+        function (item) {
+
+            const pagina =
+                item.dataset.page;
+
+
+            if (pagina === nome) {
+
+                item.classList.add(
+                    "active"
+                );
+
+            }
+
+            else {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =======================================================
    NAVEGAÇÃO
-======================= */
+======================================================= */
 
 function navegar(nome) {
 
-    console.log("Menu " + nome + " selecionado.");
+    console.log(
+        "Menu selecionado:",
+        nome
+    );
 
-    if (nome === "Dashboard") {
 
-        content.textContent =
-            "Dashboard\n\nVisão geral do sistema.";
+    atualizarMenuAtivo(nome);
 
-    }
 
-    else if (nome === "Alunos") {
+    switch (nome) {
 
-        content.textContent =
-            "Alunos\n\nÁrea de gerenciamento de alunos.";
 
-    }
+        case "Dashboard":
 
-    else if (nome === "Professores") {
+            atualizarTitulo(
+                "Dashboard",
+                "Visão geral do sistema."
+            );
 
-        content.textContent =
-            "Professores\n\nÁrea de gerenciamento de professores.";
+            mostrarResultado(
+                "Dashboard selecionado."
+            );
 
-    }
+            break;
 
-    else if (nome === "Faltas") {
 
-        content.textContent =
-            "Faltas\n\nÁrea de gerenciamento de faltas.";
+        case "Alunos":
 
-    }
+            atualizarTitulo(
+                "Alunos",
+                "Área de gerenciamento de alunos."
+            );
 
-    else if (nome === "Estatísticas") {
+            mostrarResultado(
+                `Área de alunos selecionada. Total cadastrado: ${dadosSistema.alunos}.`
+            );
 
-        content.textContent =
-            "Estatísticas\n\nÁrea de estatísticas do sistema.";
+            break;
 
-    }
 
-    else {
+        case "Professores":
 
-        content.textContent =
-            nome +
-            "\n\nEsta área está preparada para desenvolvimento futuro.";
+            atualizarTitulo(
+                "Professores",
+                "Área de gerenciamento de professores."
+            );
+
+            mostrarResultado(
+                `Área de professores selecionada. Total cadastrado: ${dadosSistema.professores}.`
+            );
+
+            break;
+
+
+        case "Turmas":
+
+            atualizarTitulo(
+                "Turmas",
+                "Área de gerenciamento de turmas."
+            );
+
+            mostrarResultado(
+                `Área de turmas selecionada. Total de turmas ativas: ${dadosSistema.turmas}.`
+            );
+
+            break;
+
+
+        case "Disciplinas":
+
+            atualizarTitulo(
+                "Disciplinas",
+                "Área de gerenciamento de disciplinas."
+            );
+
+            mostrarResultado(
+                "Área de disciplinas selecionada. Esta funcionalidade está preparada para desenvolvimento."
+            );
+
+            break;
+
+
+        case "Faltas":
+
+            atualizarTitulo(
+                "Faltas",
+                "Área de gerenciamento de faltas."
+            );
+
+            mostrarResultado(
+                `Área de faltas selecionada. Existem ${dadosSistema.faltas.length} registro(s).`
+            );
+
+            break;
+
+
+        case "Estatísticas":
+
+            atualizarTitulo(
+                "Estatísticas",
+                "Indicadores gerais do sistema."
+            );
+
+            mostrarEstatisticas();
+
+            break;
+
+
+        case "Calendário":
+
+            atualizarTitulo(
+                "Calendário",
+                "Calendário escolar."
+            );
+
+            mostrarResultado(
+                "Área de calendário selecionada. Esta funcionalidade está preparada para desenvolvimento."
+            );
+
+            break;
+
+
+        case "Relatórios":
+
+            atualizarTitulo(
+                "Relatórios",
+                "Relatórios do sistema."
+            );
+
+            mostrarResultado(
+                "Área de relatórios selecionada. Esta funcionalidade está preparada para desenvolvimento."
+            );
+
+            break;
+
+
+        case "Configurações":
+
+            atualizarTitulo(
+                "Configurações",
+                "Configurações do sistema."
+            );
+
+            mostrarResultado(
+                "Área de configurações selecionada. Esta funcionalidade está preparada para desenvolvimento."
+            );
+
+            break;
+
+
+        default:
+
+            atualizarTitulo(
+                nome,
+                "Área do sistema."
+            );
+
+            mostrarResultado(
+                `${nome} selecionado. Esta área está preparada para desenvolvimento futuro.`
+            );
+
+            break;
 
     }
 
 }
 
-/* =======================
-   EVENTOS DO DASHBOARD
-======================= */
+
+/* =======================================================
+   EVENTO - ALUNOS
+======================================================= */
 
 if (btnAlunos) {
 
@@ -277,6 +820,11 @@ if (btnAlunos) {
 
 }
 
+
+/* =======================================================
+   EVENTO - PROFESSORES
+======================================================= */
+
 if (btnProfessores) {
 
     btnProfessores.addEventListener(
@@ -285,6 +833,11 @@ if (btnProfessores) {
     );
 
 }
+
+
+/* =======================================================
+   EVENTO - TURMAS
+======================================================= */
 
 if (btnTurmas) {
 
@@ -295,6 +848,11 @@ if (btnTurmas) {
 
 }
 
+
+/* =======================================================
+   EVENTO - FREQUÊNCIA
+======================================================= */
+
 if (btnFrequencia) {
 
     btnFrequencia.addEventListener(
@@ -304,9 +862,10 @@ if (btnFrequencia) {
 
 }
 
-/* =======================
-   EVENTOS DE FALTAS
-======================= */
+
+/* =======================================================
+   EVENTO - REGISTRAR FALTA
+======================================================= */
 
 if (btnRegistrarFalta) {
 
@@ -317,6 +876,11 @@ if (btnRegistrarFalta) {
 
 }
 
+
+/* =======================================================
+   EVENTO - CONSULTAR FALTAS
+======================================================= */
+
 if (btnConsultarFaltas) {
 
     btnConsultarFaltas.addEventListener(
@@ -326,9 +890,10 @@ if (btnConsultarFaltas) {
 
 }
 
-/* =======================
-   EVENTO DE ESTATÍSTICAS
-======================= */
+
+/* =======================================================
+   EVENTO - ESTATÍSTICAS
+======================================================= */
 
 if (btnEstatisticas) {
 
@@ -339,9 +904,10 @@ if (btnEstatisticas) {
 
 }
 
-/* =======================
-   EVENTO ASYNC/AWAIT
-======================= */
+
+/* =======================================================
+   EVENTO - ASYNC/AWAIT
+======================================================= */
 
 if (btnAsync) {
 
@@ -352,39 +918,112 @@ if (btnAsync) {
 
 }
 
-/* =======================
-   EVENTOS DO MENU
-======================= */
 
-for (let i = 0; i < menuItems.length; i++) {
+/* =======================================================
+   EVENTOS DOS MENUS
+======================================================= */
 
-    menuItems[i].addEventListener(
-        "click",
-        function () {
+menuItems.forEach(
+    function (item) {
 
-            const nome =
-                this.textContent.trim();
+        item.addEventListener(
+            "click",
+            function () {
 
-            navegar(nome);
+                const nome =
+                    this.dataset.page;
+
+
+                if (!nome) {
+                    return;
+                }
+
+
+                navegar(nome);
+
+            }
+        );
+
+    }
+);
+
+
+/* =======================================================
+   ATALHO PARA ENTER NO CAMPO DE ALUNO
+======================================================= */
+
+if (studentId) {
+
+    studentId.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                registrarFalta();
+
+            }
 
         }
     );
 
 }
 
-/* =======================
+
+/* =======================================================
    INICIALIZAÇÃO
-======================= */
+======================================================= */
 
-console.log(
-    APP_NAME + " iniciado com sucesso."
-);
+function iniciarAplicacao() {
 
-console.log(
-    "Usuário:",
-    usuario
-);
+    console.log(
+        "========================================"
+    );
 
-console.log(
-    "Navegação DOM carregada."
-);
+    console.log(
+        APP_NAME
+    );
+
+    console.log(
+        "Versão:",
+        APP_VERSION
+    );
+
+    console.log(
+        "Usuário:",
+        USUARIO
+    );
+
+    console.log(
+        "========================================"
+    );
+
+
+    carregarDados();
+
+
+    atualizarMenuAtivo(
+        "Dashboard"
+    );
+
+
+    console.log(
+        "Dados carregados com sucesso."
+    );
+
+    console.log(
+        "Navegação DOM carregada."
+    );
+
+    console.log(
+        "Sistema iniciado com sucesso."
+    );
+
+}
+
+
+/* =======================================================
+   EXECUTAR A APLICAÇÃO
+======================================================= */
+
+iniciarAplicacao();  
